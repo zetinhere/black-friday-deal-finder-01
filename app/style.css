@@ -1,0 +1,313 @@
+/* Real Deal Finder — Black Friday 2026.
+   Dark “midnight sale” theme: near-black background, hot red + amber accents,
+   green for real deals. System fonts only, no network requests. */
+
+:root {
+  --bg: #0a0a10;
+  --card: #14141d;
+  --card-2: #1b1b27;
+  --line: #2a2a3a;
+  --text: #f2f2f5;
+  --muted: #a8a8b8;
+  --red: #ff3b30;
+  --amber: #ffb020;
+  --green: #2fd67a;
+  --blue: #5ea8ff;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+a { color: var(--blue); }
+a:hover { text-decoration-thickness: 2px; }
+
+/* ---- header ---- */
+.site-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+  justify-content: space-between;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 20px 0;
+}
+.brand {
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  font-size: 20px;
+}
+.brand::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  background: var(--red);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+.tag { color: var(--muted); font-size: 13px; }
+
+main { max-width: 1180px; margin: 0 auto; padding: 0 20px 40px; }
+
+/* ---- hero ---- */
+.hero { padding: 28px 0 8px; }
+.kicker {
+  margin: 0 0 10px;
+  color: var(--amber);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-size: 13px;
+}
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.hero h1 span { color: var(--red); }
+.lede { max-width: 640px; margin: 0 0 24px; color: var(--muted); font-size: 18px; }
+.lede em { color: var(--text); font-style: normal; font-weight: 700; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 0 0 8px;
+}
+.stats div {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.stats dt { color: var(--muted); font-size: 13px; margin-bottom: 2px; }
+.stats dd { margin: 0; font-size: 28px; font-weight: 900; line-height: 1.1; }
+.stats div:nth-child(2) dd { color: var(--green); }
+.stats div:nth-child(3) dd { color: var(--amber); }
+
+/* ---- controls ---- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin: 22px 0 14px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.controls label.search { flex: 1 1 260px; }
+.controls input, .controls select {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-weight: 400;
+}
+.controls input:focus, .controls select:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+}
+
+.cats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.pill {
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.pill:hover { border-color: var(--amber); }
+.pill.active { background: var(--amber); border-color: var(--amber); color: #111; font-weight: 700; }
+
+.count { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+
+/* ---- deal cards ---- */
+.deals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.deals > li { display: contents; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card:hover { border-color: #4a4a63; }
+.card-top { display: flex; justify-content: space-between; gap: 8px; }
+.cat {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.store {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.store-amazon { color: #ffb020; }
+.store-best-buy { color: #5ea8ff; }
+.store-walmart { color: #6fd3ff; }
+.store-target { color: #ff6b6b; }
+.card h3 { margin: 0; font-size: 19px; line-height: 1.25; }
+.card h3 a { color: var(--text); text-decoration: none; }
+.card h3 a:hover { color: var(--amber); }
+
+.price { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.price strong { font-size: 30px; font-weight: 900; letter-spacing: -0.01em; }
+.price s { color: var(--muted); font-size: 17px; }
+.save { color: var(--green); font-weight: 700; font-size: 14px; }
+
+.verdict {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+.verdict.real { background: #0d2b1a; color: var(--green); border: 1px solid #1d5c37; }
+.verdict.good { background: #33270a; color: var(--amber); border: 1px solid #6b4d0d; }
+.verdict.check { background: #26262e; color: var(--muted); border: 1px solid var(--line); }
+
+.meta { margin: 0; color: var(--muted); font-size: 13px; }
+.card-actions { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 9px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 14px;
+}
+.btn:hover { background: #e63329; }
+.btn.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+.btn.ghost:hover { border-color: var(--amber); color: var(--amber); }
+.btn.big { font-size: 16px; padding: 12px 20px; }
+
+.empty { color: var(--muted); padding: 24px; }
+
+/* ---- method ---- */
+.method {
+  margin-top: 36px;
+  padding: 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.method h2 { margin: 0 0 12px; font-size: 22px; }
+.method ul { margin: 0 0 12px; padding-left: 0; list-style: none; display: grid; gap: 10px; }
+.method p { color: var(--muted); margin: 0; }
+
+/* ---- detail page ---- */
+.back { margin: 22px 0 0; }
+.detail { padding: 8px 0 8px; max-width: 760px; }
+.detail h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.1; margin: 12px 0; }
+.detail .price strong { font-size: 44px; }
+.pricebar {
+  position: relative;
+  height: 26px;
+  margin: 14px 0;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pricebar-now {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), #7ee2a8);
+}
+.pricebar-label, .pricebar-caption {
+  margin: 6px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.detail h2 { margin: 26px 0 8px; font-size: 20px; }
+.detail p { max-width: 640px; }
+.caveat {
+  padding: 12px 14px;
+  background: #33270a;
+  border: 1px solid #6b4d0d;
+  border-radius: 9px;
+  color: var(--amber);
+}
+.facts {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 8px 16px;
+  margin: 18px 0;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.facts dt { color: var(--muted); font-size: 14px; }
+.facts dd { margin: 0; }
+.same { padding-left: 20px; }
+
+/* ---- footer ---- */
+footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+  color: var(--muted);
+  font-size: 14px;
+}
+footer h2 { color: var(--text); font-size: 18px; margin: 0 0 8px; }
+footer ul { margin: 0 0 16px; padding-left: 20px; }
+footer p { max-width: 760px; }
+
+/* ---- phone ---- */
+@media (max-width: 900px) {
+  .deals { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .deals { grid-template-columns: 1fr; }
+  .stats dd { font-size: 22px; }
+  .facts { grid-template-columns: 110px 1fr; }
+  .controls label { flex: 1 1 100%; }
+}
